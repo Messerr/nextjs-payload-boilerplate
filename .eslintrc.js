@@ -20,6 +20,7 @@ module.exports = {
   },
   rules: {
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'linebreak-style': ['error', 'windows'],
     'import/prefer-default-export': 'off',
     'react/prop-types': 'off',
     'react/no-unused-prop-types': 'off',
