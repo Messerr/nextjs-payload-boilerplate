@@ -1,13 +1,31 @@
 import React from 'react';
 import { Block } from 'payload/types';
-import RichText from '../../components/RichText';
-import classes from './index.module.css';
+// import RichText from '../../components/RichText';
+import backgroundColor from '../../fields/backgroundColor';
+
+export type ColumnWidth = 'oneThird' | 'half' | 'twoThirds' | 'full';
+
+export type Alignment = 'left' | 'center' | 'right';
+
+export type AccentLineAlignment = 'left' | 'right'
+
+export type PaddingSize = 'none' | 'small' | 'medium' | 'large'
+
+export type Column = {
+  content: unknown
+  width: ColumnWidth
+  alignment: Alignment
+}
 
 export type Type = {
-  blockType: 'content';
-  blockName?: string;
-  content: unknown;
-};
+  blockType: 'content'
+  blockName?: string
+  columns: Column[]
+  accentLine: boolean
+  accentLineAlignment: AccentLineAlignment
+  paddingTop: PaddingSize
+  paddingBottom: PaddingSize
+}
 
 export const Content: Block = {
   slug: 'content',
@@ -16,44 +34,22 @@ export const Content: Block = {
     plural: 'Content Blocks',
   },
   fields: [
+    backgroundColor,
     {
       name: 'columns',
       type: 'array',
       minRows: 1,
+      labels: {
+        singular: 'Column',
+        plural: 'Columns',
+      },
       fields: [
-        {
-          name: 'backgroundColor',
-          type: 'radio',
-          label: 'Background Color',
-          defaultValue: 'none',
-          admin: {
-            layout: 'horizontal',
-          },
-          options: [
-            {
-              label: 'None',
-              value: 'none',
-            },
-            {
-              label: 'Red',
-              value: 'red',
-            },
-            {
-              label: 'Blue',
-              value: 'blue',
-            },
-            {
-              label: 'Orange',
-              value: 'orange',
-            },
-          ],
-        },
         {
           type: 'row',
           fields: [
             {
               name: 'width',
-              label: 'Column WIdth',
+              label: 'Column Width',
               type: 'select',
               defaultValue: 'full',
               required: true,
@@ -87,8 +83,8 @@ export const Content: Block = {
               required: true,
               options: [
                 {
-                  value: 'left',
                   label: 'Left',
+                  value: 'left',
                 },
                 {
                   label: 'Center',
@@ -134,6 +130,7 @@ export const Content: Block = {
         },
       ],
       admin: {
+        condition: (_, siblingData) => siblingData.accentLine,
         layout: 'horizontal',
       },
     },
@@ -147,16 +144,20 @@ export const Content: Block = {
           defaultValue: 'medium',
           options: [
             {
+              label: 'None',
+              value: 'none',
+            },
+            {
               label: 'Small',
               value: 'small',
             },
             {
               label: 'Medium',
-              value: 'Medium',
+              value: 'medium',
             },
             {
               label: 'Large',
-              value: 'Large',
+              value: 'large',
             },
           ],
           admin: {
@@ -170,16 +171,20 @@ export const Content: Block = {
           defaultValue: 'medium',
           options: [
             {
+              label: 'None',
+              value: 'none',
+            },
+            {
               label: 'Small',
               value: 'small',
             },
             {
               label: 'Medium',
-              value: 'Medium',
+              value: 'medium',
             },
             {
               label: 'Large',
-              value: 'Large',
+              value: 'large',
             },
           ],
           admin: {
@@ -191,14 +196,10 @@ export const Content: Block = {
   ],
 };
 
-export const Component: React.FC<Type> = (props) => {
-  const { content } = props;
-
-  return (
-    <div className={classes.wrap}>
-      <RichText content={content} />
-    </div>
-  );
-};
+export const Component: React.FC<Type> = () => (
+  <div>
+    Content Placeholder
+  </div>
+);
 
 export default Content;

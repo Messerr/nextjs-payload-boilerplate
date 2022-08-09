@@ -1,18 +1,9 @@
 import { GlobalConfig } from 'payload/types';
-import link, { Type as LinkType } from '../fields/link';
+import link from '../fields/link';
 
-export type Type = {
-  nav: {
-    link: LinkType
-  }[]
-}
-
-const MegaMenu: GlobalConfig = {
-  slug: 'mega-menu',
-  label: 'Mega Menu',
-  access: {
-    read: () => true,
-  },
+const Footer: GlobalConfig = {
+  slug: 'footer',
+  label: 'Footer',
   fields: [
     {
       name: 'nav',
@@ -29,4 +20,4 @@ const MegaMenu: GlobalConfig = {
   ],
 };
 
-export default MegaMenu;
+export default Footer;

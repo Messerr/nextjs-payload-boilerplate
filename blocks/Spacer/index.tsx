@@ -1,12 +1,22 @@
 import { Block } from 'payload/types';
 
+export type Type = {
+  size: 'small' | 'medium' | 'large'
+}
+
 const Spacer: Block = {
   slug: 'spacer',
+  labels: {
+    singular: 'Spacer',
+    plural: 'Spacers',
+  },
   fields: [
     {
       name: 'size',
       label: 'Size',
       type: 'radio',
+      required: true,
+      defaultValue: 'medium',
       options: [
         {
           label: 'Small',
@@ -14,13 +24,16 @@ const Spacer: Block = {
         },
         {
           label: 'Medium',
-          value: 'Medium',
+          value: 'medium',
         },
         {
           label: 'Large',
-          value: 'Large',
+          value: 'large',
         },
       ],
+      admin: {
+        layout: 'horizontal',
+      },
     },
   ],
 };

@@ -6,6 +6,8 @@ import FormSubmission from './collections/FormSubmission';
 import Study from './collections/Study';
 import Category from './collections/Category';
 import MegaMenu from './globals/MegaMenu';
+import Footer from './globals/Footer';
+import SocialMedia from './globals/SocialMedia';
 
 dotenv.config();
 
@@ -20,5 +22,7 @@ export default buildConfig({
   ],
   globals: [
     MegaMenu,
+    Footer,
+    SocialMedia,
   ],
 });
